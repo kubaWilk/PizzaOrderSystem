@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Menu]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Type] NVARCHAR(50) NOT NULL, 
+    [Name] NVARCHAR(50) NOT NULL, 
+    [Price] INT NOT NULL 
+)
