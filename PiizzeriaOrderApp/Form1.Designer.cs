@@ -30,9 +30,9 @@
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.MainDishButton = new System.Windows.Forms.Button();
-            this.MDAddsButton = new System.Windows.Forms.Button();
             this.PizzaButton = new System.Windows.Forms.Button();
             this.SoupsButton = new System.Windows.Forms.Button();
+            this.MDAddsButton = new System.Windows.Forms.Button();
             this.DrinksButton = new System.Windows.Forms.Button();
             this.MenuItemsListBox = new System.Windows.Forms.ListBox();
             this.OrderItemsListBox = new System.Windows.Forms.ListBox();
@@ -66,15 +66,6 @@
             this.MainDishButton.Text = "Danie Główne";
             this.MainDishButton.UseVisualStyleBackColor = true;
             // 
-            // MDAddsButton
-            // 
-            this.MDAddsButton.Location = new System.Drawing.Point(280, 3);
-            this.MDAddsButton.Name = "MDAddsButton";
-            this.MDAddsButton.Size = new System.Drawing.Size(76, 46);
-            this.MDAddsButton.TabIndex = 1;
-            this.MDAddsButton.Text = "Dodatki";
-            this.MDAddsButton.UseVisualStyleBackColor = true;
-            // 
             // PizzaButton
             // 
             this.PizzaButton.Location = new System.Drawing.Point(94, 3);
@@ -92,6 +83,15 @@
             this.SoupsButton.TabIndex = 3;
             this.SoupsButton.Text = "Zupy";
             this.SoupsButton.UseVisualStyleBackColor = true;
+            // 
+            // MDAddsButton
+            // 
+            this.MDAddsButton.Location = new System.Drawing.Point(280, 3);
+            this.MDAddsButton.Name = "MDAddsButton";
+            this.MDAddsButton.Size = new System.Drawing.Size(76, 46);
+            this.MDAddsButton.TabIndex = 1;
+            this.MDAddsButton.Text = "Dodatki";
+            this.MDAddsButton.UseVisualStyleBackColor = true;
             // 
             // DrinksButton
             // 
@@ -153,6 +153,7 @@
             this.AddToOrderButton.TabIndex = 7;
             this.AddToOrderButton.Text = "Dodaj do zamówienia";
             this.AddToOrderButton.UseVisualStyleBackColor = true;
+            this.AddToOrderButton.Click += new System.EventHandler(this.AddToOrderButton_Click);
             // 
             // DeleteFromOrderButton
             // 
