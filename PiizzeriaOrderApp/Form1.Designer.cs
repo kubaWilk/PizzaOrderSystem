@@ -65,6 +65,7 @@
             this.MainDishButton.TabIndex = 0;
             this.MainDishButton.Text = "Danie Główne";
             this.MainDishButton.UseVisualStyleBackColor = true;
+            this.MainDishButton.Click += new System.EventHandler(this.MainDishButton_Click);
             // 
             // PizzaButton
             // 
@@ -74,6 +75,7 @@
             this.PizzaButton.TabIndex = 2;
             this.PizzaButton.Text = "Pizza";
             this.PizzaButton.UseVisualStyleBackColor = true;
+            this.PizzaButton.Click += new System.EventHandler(this.PizzaButton_Click);
             // 
             // SoupsButton
             // 
@@ -83,6 +85,7 @@
             this.SoupsButton.TabIndex = 3;
             this.SoupsButton.Text = "Zupy";
             this.SoupsButton.UseVisualStyleBackColor = true;
+            this.SoupsButton.Click += new System.EventHandler(this.SoupsButton_Click);
             // 
             // MDAddsButton
             // 
@@ -92,6 +95,7 @@
             this.MDAddsButton.TabIndex = 1;
             this.MDAddsButton.Text = "Dodatki";
             this.MDAddsButton.UseVisualStyleBackColor = true;
+            this.MDAddsButton.Click += new System.EventHandler(this.MDAddsButton_Click);
             // 
             // DrinksButton
             // 
@@ -101,6 +105,7 @@
             this.DrinksButton.TabIndex = 4;
             this.DrinksButton.Text = "Napoje";
             this.DrinksButton.UseVisualStyleBackColor = true;
+            this.DrinksButton.Click += new System.EventHandler(this.DrinksButton_Click);
             // 
             // MenuItemsListBox
             // 
@@ -135,6 +140,7 @@
             this.SummedOrderPriceLabel.Size = new System.Drawing.Size(45, 15);
             this.SummedOrderPriceLabel.TabIndex = 5;
             this.SummedOrderPriceLabel.Text = "SUMA: ";
+            this.SummedOrderPriceLabel.Click += new System.EventHandler(this.SummedOrderPriceLabel_Click);
             // 
             // OrderCommentsLabel
             // 
@@ -163,6 +169,7 @@
             this.DeleteFromOrderButton.TabIndex = 8;
             this.DeleteFromOrderButton.Text = "Usuń z zamówienia";
             this.DeleteFromOrderButton.UseVisualStyleBackColor = true;
+            this.DeleteFromOrderButton.Click += new System.EventHandler(this.DeleteFromOrderButton_Click);
             // 
             // PlaceAnOrderButton
             // 

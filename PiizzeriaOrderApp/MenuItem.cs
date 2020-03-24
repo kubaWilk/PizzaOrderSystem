@@ -11,7 +11,7 @@ namespace PiizzeriaOrderApp
         public string ItemName { get; set; }
         public int ItemPrice { get; set; }
         public string ItemType { get; set; }
-        public string Fullinfo { get { return $"{ ItemName } { ItemPrice } zł"; } }
+        public string FullInfo { get { return $"{ ItemName } { ItemPrice } zł"; } }
 
         public MenuItem(string NewItemType = "NullType", int NewItemPrice = 0, string NewItemName = "NullName")
         {
@@ -20,6 +20,4 @@ namespace PiizzeriaOrderApp
             ItemType = NewItemType;
         }
     }
-
-
 }

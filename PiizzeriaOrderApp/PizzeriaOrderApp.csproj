@@ -74,20 +74,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Additive.cs" />
-    <Compile Include="Drink.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainDish.cs" />
     <Compile Include="MenuItem.cs" />
-    <Compile Include="Pizza.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Soup.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserOrder.cs" />
     <EmbeddedResource Include="Form1.resx">
