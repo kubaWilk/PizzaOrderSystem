@@ -36,7 +36,7 @@
             this.DrinksButton = new System.Windows.Forms.Button();
             this.MenuItemsListBox = new System.Windows.Forms.ListBox();
             this.OrderItemsListBox = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.OrderCommentsTextBox = new System.Windows.Forms.TextBox();
             this.SummedOrderPriceLabel = new System.Windows.Forms.Label();
             this.OrderCommentsLabel = new System.Windows.Forms.Label();
             this.AddToOrderButton = new System.Windows.Forms.Button();
@@ -125,12 +125,13 @@
             this.OrderItemsListBox.Size = new System.Drawing.Size(203, 274);
             this.OrderItemsListBox.TabIndex = 2;
             // 
-            // textBox1
+            // OrderCommentsTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(14, 449);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(453, 23);
-            this.textBox1.TabIndex = 3;
+            this.OrderCommentsTextBox.Location = new System.Drawing.Point(14, 449);
+            this.OrderCommentsTextBox.Name = "OrderCommentsTextBox";
+            this.OrderCommentsTextBox.Size = new System.Drawing.Size(453, 23);
+            this.OrderCommentsTextBox.TabIndex = 3;
+            this.OrderCommentsTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // SummedOrderPriceLabel
             // 
@@ -179,6 +180,7 @@
             this.PlaceAnOrderButton.TabIndex = 9;
             this.PlaceAnOrderButton.Text = "Złóż zamówienie";
             this.PlaceAnOrderButton.UseVisualStyleBackColor = true;
+            this.PlaceAnOrderButton.Click += new System.EventHandler(this.PlaceAnOrderButton_Click);
             // 
             // OrderWindow
             // 
@@ -190,7 +192,7 @@
             this.Controls.Add(this.AddToOrderButton);
             this.Controls.Add(this.OrderCommentsLabel);
             this.Controls.Add(this.SummedOrderPriceLabel);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.OrderCommentsTextBox);
             this.Controls.Add(this.OrderItemsListBox);
             this.Controls.Add(this.MenuItemsListBox);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -214,7 +216,7 @@
         private System.Windows.Forms.Button DrinksButton;
         private System.Windows.Forms.ListBox MenuItemsListBox;
         private System.Windows.Forms.ListBox OrderItemsListBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox OrderCommentsTextBox;
         private System.Windows.Forms.Label SummedOrderPriceLabel;
         private System.Windows.Forms.Label OrderCommentsLabel;
         private System.Windows.Forms.Button AddToOrderButton;

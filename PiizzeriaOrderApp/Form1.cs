@@ -14,7 +14,31 @@ namespace PiizzeriaOrderApp
     {
         private List<MenuItem> WholeMenu;
         private List<MenuItem> UserOrder = new List<MenuItem>();
+        private User CurrentUser = new User();
+        private UserOrder tempOrder = new UserOrder();  //this is added so code later'd work
         private int SummedOrderPrice = 0;
+
+        private void getCurrentUser()
+        {
+            CurrentUser.ID = 1;
+            CurrentUser.FirstName = "Karol";
+            CurrentUser.EMail = "jakub_wilk@outlook.com";
+            CurrentUser.City = "Wadowice";
+            CurrentUser.LastName = "Wojtyła";
+            CurrentUser.Password = "";
+            CurrentUser.PostCode = "2137";
+            CurrentUser.Street = "Kremówkowa 69";
+            CurrentUser.UserName = "jampapiez2";
+        }
+        
+        private void ProcessAnOrder()
+        {
+            tempOrder.ID = 1;
+            tempOrder.OrderItems = "Kremówka";
+            tempOrder.UserID = CurrentUser.ID;
+            tempOrder.OrderComments = OrderCommentsTextBox.Text;
+        }
+
         private void GetWholeMenu()
         {
             WholeMenu = new List<MenuItem>();
@@ -55,6 +79,7 @@ namespace PiizzeriaOrderApp
         {
             InitializeComponent();
             GetWholeMenu();
+            getCurrentUser();
 
             MenuItemsListBox.DataSource = GetTypeMenuList("MainDish");
             MenuItemsListBox.DisplayMember = "FullInfo";
@@ -69,12 +94,11 @@ namespace PiizzeriaOrderApp
 
         private void AddToOrderButton_Click(object sender, EventArgs e)
         {
+            //I think it still needs to have a functionality of adding items inside a list. To be done later.
             MenuItem tempMenuItem = MenuItemsListBox.SelectedItem as MenuItem;
 
             if (tempMenuItem.ItemType == "PizzaAdd")
             {
-                try
-                {
                     int count = 1;
                     while (count < 5)
                     {
@@ -89,24 +113,25 @@ namespace PiizzeriaOrderApp
                                 SummedOrderPriceLabel.Text = $"SUMA: {SummedOrderPrice}zł";
                                 break;
                             }
-                            if (AddCheckItem.ItemName == tempMenuItem.ItemName)
+                            if (AddCheckItem.ItemName == tempMenuItem.ItemName &&  AddCheckItem.ItemType != "Pizza")
                             {
-                                MessageBox.Show("Nie można dodać tego samego dodatku dwa razy!");
+                                MessageBox.Show("Na liście brakuje dania, do którego można wybrać dodatek.");
                                 break;
                             }
+                            else if (AddCheckItem.ItemName == tempMenuItem.ItemName && AddCheckItem.ItemType != "Pizza")
+                        {
+                            MessageBox.Show("Nie można dodać tego samego dodatku dwa razy!");
+                            break;
                         }
+                    }
                         catch(ArgumentOutOfRangeException ex)
                         {
                             MessageBox.Show("Na liście brakuje dania, do którego można wybrać dodatek.");
+                            Console.WriteLine("Catched an expression : {0]", ex.Message);
                             break;
                         }
                         count++;
                     }
-                }
-                catch (ArgumentOutOfRangeException ex)
-                {
-                    MessageBox.Show("Musisz wybrać danie, do którego chcesz dodatek!");
-                }
             }
             else if (tempMenuItem.ItemType == "MDAdd")
             {
@@ -126,7 +151,12 @@ namespace PiizzeriaOrderApp
                                 SummedOrderPriceLabel.Text = $"SUMA: {SummedOrderPrice}zł";
                                 break;
                             }
-                            if (AddCheckItem.ItemName == tempMenuItem.ItemName)
+                            if (AddCheckItem.ItemName == tempMenuItem.ItemName && AddCheckItem.ItemType != "MainDish")
+                            {
+                                MessageBox.Show("Na liście brakuje dania, do którego można wybrać dodatek.");
+                                break;
+                            }
+                            else if (AddCheckItem.ItemName == tempMenuItem.ItemName && AddCheckItem.ItemType != "MainDish")
                             {
                                 MessageBox.Show("Nie można dodać tego samego dodatku dwa razy!");
                                 break;
@@ -135,6 +165,7 @@ namespace PiizzeriaOrderApp
                         catch (ArgumentOutOfRangeException ex)
                         {
                             MessageBox.Show("Na liście brakuje dania, do którego można wybrać dodatek.");
+                            Console.WriteLine("Catched an expression : {0]", ex.Message);
                             break;
                         }
                         count++;
@@ -143,6 +174,7 @@ namespace PiizzeriaOrderApp
                 catch (ArgumentOutOfRangeException ex)
                 {
                     MessageBox.Show("Musisz wybrać danie, do którego chcesz dodatek!");
+                    Console.WriteLine("Catched an expression : {0]", ex.Message);
                 }
             }
             else
@@ -221,6 +253,8 @@ namespace PiizzeriaOrderApp
                             SummedOrderPriceLabel.Text = $"SUMA: {SummedOrderPrice}zł";
                             break;
                         }
+                        Console.WriteLine("Catched an expression : {0]", ex.Message);
+
                     }
                 }
             }
@@ -234,6 +268,19 @@ namespace PiizzeriaOrderApp
         }
 
         private void SummedOrderPriceLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PlaceAnOrderButton_Click(object sender, EventArgs e)
+        {
+            ProcessAnOrder();
+            EmailSender OrderEmail = new EmailSender();
+            OrderEmail.SendAnEmail(CurrentUser, tempOrder);
+            MessageBox.Show("Złożenie zamówienia powiodło sie.");
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

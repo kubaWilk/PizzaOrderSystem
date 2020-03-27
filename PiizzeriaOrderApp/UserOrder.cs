@@ -8,6 +8,7 @@ namespace PiizzeriaOrderApp
 {
     public class UserOrder
     {
+        public int ID { get; set; }
         public int UserID { get; set; }
         public string OrderItems { get; set; }
         public string OrderComments { get; set; }
