@@ -27,6 +27,7 @@ namespace PiizzeriaOrderApp
                 }
             }
         }
+        
         public List<User> GetUserByEMail(string EMail)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MainDB")))
@@ -66,13 +67,18 @@ namespace PiizzeriaOrderApp
                 try
                 {
                     var output = connection.Query<User>("spUsers_DoesUserExistByUserName @UserName", new { UserName = UserToRegister.UserName }).ToList();
-                    User throwMeAnExceptionSenpaiPlz = output[0]; //okay, it's too late to rebuild that function so im just gonna make it throw an exception and change it later.
+                    User throwMeAnException = output[0];  //after a bit of thinking I've decided it's not that bad idea
                     Status = "UserName";
                 }
-                catch (Exception ex)
+                catch (ArgumentOutOfRangeException ex)
                 {
                     Console.WriteLine($"There is no user with such username in a database: {ex.Message}"); 
                     Status = "Success";
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Something went wrong: {0}.", ex.Message);
+                    return false;
                 }
 
                 try
@@ -80,7 +86,7 @@ namespace PiizzeriaOrderApp
                     if (Status != "UserName")
                     {
                         var output = connection.Query<User>("spUsers_DoesUserExistByEMail @UserEMail", new { UserEMail = UserToRegister.EMail }).ToList();
-                        User throwMeAnExceptionSenpaiPlz = output[0]; //okay, it's too late to rebuild that function so im just gonna make it throw an exception and change it later.
+                        User throwMeAnException = output[0]; 
                         Status = "EMail"; 
                        
 
@@ -91,7 +97,7 @@ namespace PiizzeriaOrderApp
                         return false;
                     }
                 }
-                catch (Exception ex)
+                catch (ArgumentOutOfRangeException ex)
                 {
                     Console.WriteLine($"There is no user with such username & email in a database: {ex.Message}");
                     connection.Execute("dbo.spUsers_InsertANewUser" +
@@ -109,6 +115,28 @@ namespace PiizzeriaOrderApp
                         });
                     Status = "Success";
                     return true;
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Something went wrong: {0}", ex.Message);
+                    return false;
+                }
+            }
+        }
+
+        public bool PutOrderInDB(UserOrder order)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MainDB")))
+            {
+                try
+                {
+                    connection.Execute("spOrders_InsertANewOrder @UserID, @OrderItems, @OrderComments", order);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Something went wrong in getting menu items from a database: {ex.Message}");
+                    return false;
                 }
             }
         }

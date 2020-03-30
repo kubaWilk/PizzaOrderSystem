@@ -14,17 +14,8 @@ namespace PiizzeriaOrderApp
     {
         private List<MenuItem> UserOrder = new List<MenuItem>();
         private User CurrentUser;
-        private UserOrder tempOrder = new UserOrder();  //this is added so code later'd work
         private int SummedOrderPrice = 0;
         
-        private void ProcessAnOrder()
-        {
-            tempOrder.ID = 1;
-            tempOrder.OrderItems = "Kremówka";
-            tempOrder.UserID = CurrentUser.ID;
-            tempOrder.OrderComments = OrderCommentsTextBox.Text;
-        }
-
         public OrderWindow(User UserInfo)
         {
             InitializeComponent();
@@ -215,11 +206,20 @@ namespace PiizzeriaOrderApp
 
         private void PlaceAnOrderButton_Click(object sender, EventArgs e)
         {
-            ProcessAnOrder();
-            EmailSender OrderEmail = new EmailSender();
-            OrderEmail.SendAnEmail(CurrentUser, tempOrder);
-            MessageBox.Show("Złożenie zamówienia powiodło sie.");
-        }
+            UserOrder order = new UserOrder();
+            //order.PlaceOrder(UserOrder, CurrentUser, OrderCommentsTextBox.Text);
+
+            if (order.PlaceOrder(UserOrder, CurrentUser, OrderCommentsTextBox.Text))
+            {
+                EmailSender OrderEmail = new EmailSender();
+                OrderEmail.SendAnEmail(CurrentUser, order);
+                MessageBox.Show("Zamówienie złożono pomyślnie.");
+            }
+            else
+            {
+                Console.WriteLine("Złożenie zamówienia nie powiodło się.");
+            }
+}
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
