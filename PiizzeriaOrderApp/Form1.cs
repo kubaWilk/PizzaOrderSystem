@@ -12,24 +12,10 @@ namespace PiizzeriaOrderApp
 {
     public partial class OrderWindow : Form
     {
-        private List<MenuItem> WholeMenu;
         private List<MenuItem> UserOrder = new List<MenuItem>();
-        private User CurrentUser = new User();
+        private User CurrentUser;
         private UserOrder tempOrder = new UserOrder();  //this is added so code later'd work
         private int SummedOrderPrice = 0;
-
-        private void getCurrentUser()
-        {
-            CurrentUser.ID = 1;
-            CurrentUser.FirstName = "Karol";
-            CurrentUser.EMail = "jakub_wilk@outlook.com";
-            CurrentUser.City = "Wadowice";
-            CurrentUser.LastName = "Wojtyła";
-            CurrentUser.Password = "";
-            CurrentUser.PostCode = "2137";
-            CurrentUser.Street = "Kremówkowa 69";
-            CurrentUser.UserName = "jampapiez2";
-        }
         
         private void ProcessAnOrder()
         {
@@ -39,49 +25,10 @@ namespace PiizzeriaOrderApp
             tempOrder.OrderComments = OrderCommentsTextBox.Text;
         }
 
-        private void GetWholeMenu()
-        {
-            WholeMenu = new List<MenuItem>();
-            WholeMenu.Add(new MenuItem("MainDish", 20, "MainDish1"));
-            WholeMenu.Add(new MenuItem("Pizza", 20, "Pizza1"));
-            WholeMenu.Add(new MenuItem("Soup", 20, "Soup1"));
-            WholeMenu.Add(new MenuItem("MDAdd", 20, "MainDishAdditive1"));
-            WholeMenu.Add(new MenuItem("PizzaAdd", 20, "Additive1"));
-            WholeMenu.Add(new MenuItem("PizzaAdd", 20, "Additive2"));
-            WholeMenu.Add(new MenuItem("Drink", 20, "Drink1"));
-        }
-
-        private List<MenuItem> GetTypeMenuList(string MenuItemType)
-        {
-            List<MenuItem> ItemTypeList = new List<MenuItem>();
-
-            if(MenuItemType == "Add")
-            {
-                for (int index = 0; index < WholeMenu.Count; index++)
-                {
-                    if (WholeMenu[index].ItemType == "PizzaAdd") ItemTypeList.Add(WholeMenu[index]);
-                }
-                for (int index = 0; index < WholeMenu.Count; index++)
-                {
-                    if (WholeMenu[index].ItemType == "MDAdd") ItemTypeList.Add(WholeMenu[index]);
-                }
-            }
-
-            for (int index = 0; index < WholeMenu.Count; index++)
-            {
-                if (WholeMenu[index].ItemType == MenuItemType) ItemTypeList.Add(WholeMenu[index]);
-            }
-
-            return ItemTypeList;
-        }
-
-        public OrderWindow()
+        public OrderWindow(User UserInfo)
         {
             InitializeComponent();
-            GetWholeMenu();
-            getCurrentUser();
-
-            MenuItemsListBox.DataSource = GetTypeMenuList("MainDish");
+            CurrentUser = UserInfo;
             MenuItemsListBox.DisplayMember = "FullInfo";
             OrderItemsListBox.DisplayMember = "FullInfo";
             SummedOrderPriceLabel.Text = "SUMA: 0zł";
@@ -105,6 +52,7 @@ namespace PiizzeriaOrderApp
                         try
                         {
                             MenuItem AddCheckItem = OrderItemsListBox.Items[OrderItemsListBox.Items.Count - count] as MenuItem;
+                        if (AddCheckItem.ItemType != "Pizza" && AddCheckItem.ItemType != "PizzaAdd") { MessageBox.Show("Nie można wybrać tego dodatku do wybranego dania."); break; }
                             if (AddCheckItem.ItemType == "Pizza")
                             {
                                 OrderItemsListBox.Items.Add(tempMenuItem);
@@ -113,24 +61,19 @@ namespace PiizzeriaOrderApp
                                 SummedOrderPriceLabel.Text = $"SUMA: {SummedOrderPrice}zł";
                                 break;
                             }
-                            if (AddCheckItem.ItemName == tempMenuItem.ItemName &&  AddCheckItem.ItemType != "Pizza")
+                            else if (AddCheckItem.ItemName == tempMenuItem.ItemName) // && AddCheckItem.ItemType != "Pizza"
                             {
-                                MessageBox.Show("Na liście brakuje dania, do którego można wybrać dodatek.");
+                                MessageBox.Show("Nie można dodać tego samego dodatku dwa razy!");
                                 break;
                             }
-                            else if (AddCheckItem.ItemName == tempMenuItem.ItemName && AddCheckItem.ItemType != "Pizza")
-                        {
-                            MessageBox.Show("Nie można dodać tego samego dodatku dwa razy!");
-                            break;
+                            else count++;
                         }
-                    }
                         catch(ArgumentOutOfRangeException ex)
                         {
                             MessageBox.Show("Na liście brakuje dania, do którego można wybrać dodatek.");
-                            Console.WriteLine("Catched an expression : {0]", ex.Message);
+                            Console.WriteLine("Catched an expression : {0}", ex.Message);
                             break;
                         }
-                        count++;
                     }
             }
             else if (tempMenuItem.ItemType == "MDAdd")
@@ -143,6 +86,7 @@ namespace PiizzeriaOrderApp
                         try
                         {
                             MenuItem AddCheckItem = OrderItemsListBox.Items[OrderItemsListBox.Items.Count - count] as MenuItem;
+                            if (AddCheckItem.ItemType != "MainDish" && AddCheckItem.ItemType != "MDAdd") { MessageBox.Show("Nie można wybrać tego dodatku do wybranego dania."); break; }
                             if (AddCheckItem.ItemType == "MainDish")
                             {
                                 OrderItemsListBox.Items.Add(tempMenuItem);
@@ -151,30 +95,26 @@ namespace PiizzeriaOrderApp
                                 SummedOrderPriceLabel.Text = $"SUMA: {SummedOrderPrice}zł";
                                 break;
                             }
-                            if (AddCheckItem.ItemName == tempMenuItem.ItemName && AddCheckItem.ItemType != "MainDish")
-                            {
-                                MessageBox.Show("Na liście brakuje dania, do którego można wybrać dodatek.");
-                                break;
-                            }
                             else if (AddCheckItem.ItemName == tempMenuItem.ItemName && AddCheckItem.ItemType != "MainDish")
                             {
                                 MessageBox.Show("Nie można dodać tego samego dodatku dwa razy!");
                                 break;
                             }
+                            else count++;
+
                         }
                         catch (ArgumentOutOfRangeException ex)
                         {
                             MessageBox.Show("Na liście brakuje dania, do którego można wybrać dodatek.");
-                            Console.WriteLine("Catched an expression : {0]", ex.Message);
+                            Console.WriteLine("Catched an expression : {0}", ex);
                             break;
                         }
-                        count++;
                     }
                 }
                 catch (ArgumentOutOfRangeException ex)
                 {
                     MessageBox.Show("Musisz wybrać danie, do którego chcesz dodatek!");
-                    Console.WriteLine("Catched an expression : {0]", ex.Message);
+                    Console.WriteLine("Catched an expression : {0}", ex.Message);
                 }
             }
             else
@@ -189,31 +129,32 @@ namespace PiizzeriaOrderApp
 
         private void MainDishButton_Click(object sender, EventArgs e)
         {
-            MenuItemsListBox.DataSource = GetTypeMenuList("MainDish");
+
+            MenuItemsListBox.DataSource = MenuItem.GetMenuItemsByType("MainDish");
             MenuItemsListBox.DisplayMember = "FullInfo";
         }
 
         private void PizzaButton_Click(object sender, EventArgs e)
         {
-            MenuItemsListBox.DataSource = GetTypeMenuList("Pizza");
+            MenuItemsListBox.DataSource = MenuItem.GetMenuItemsByType("Pizza");
             MenuItemsListBox.DisplayMember = "FullInfo";
         }
 
         private void SoupsButton_Click(object sender, EventArgs e)
         {
-            MenuItemsListBox.DataSource = GetTypeMenuList("Soup");
+            MenuItemsListBox.DataSource = MenuItem.GetMenuItemsByType("Soup");
             MenuItemsListBox.DisplayMember = "FullInfo";
         }
 
         private void MDAddsButton_Click(object sender, EventArgs e)
         {
-            MenuItemsListBox.DataSource = GetTypeMenuList("Add");
+            MenuItemsListBox.DataSource = MenuItem.GetMenuItemsByType("Add");
             MenuItemsListBox.DisplayMember = "FullInfo";
         }
 
         private void DrinksButton_Click(object sender, EventArgs e)
         {
-            MenuItemsListBox.DataSource = GetTypeMenuList("Drink");
+            MenuItemsListBox.DataSource = MenuItem.GetMenuItemsByType("Drink");
             MenuItemsListBox.DisplayMember = "FullInfo";
         }
 
@@ -253,7 +194,7 @@ namespace PiizzeriaOrderApp
                             SummedOrderPriceLabel.Text = $"SUMA: {SummedOrderPrice}zł";
                             break;
                         }
-                        Console.WriteLine("Catched an expression : {0]", ex.Message);
+                        Console.WriteLine("Catched an expression : {0}", ex.Message);
 
                     }
                 }
@@ -281,6 +222,11 @@ namespace PiizzeriaOrderApp
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MenuItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

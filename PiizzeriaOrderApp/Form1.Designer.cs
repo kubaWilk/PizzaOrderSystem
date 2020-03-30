@@ -115,6 +115,7 @@
             this.MenuItemsListBox.Name = "MenuItemsListBox";
             this.MenuItemsListBox.Size = new System.Drawing.Size(203, 274);
             this.MenuItemsListBox.TabIndex = 1;
+            this.MenuItemsListBox.SelectedIndexChanged += new System.EventHandler(this.MenuItemsListBox_SelectedIndexChanged);
             // 
             // OrderItemsListBox
             // 

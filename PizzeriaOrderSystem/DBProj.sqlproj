@@ -64,5 +64,19 @@
     <Build Include="dbo\Tables\Menu.sql" />
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Tables\Orders.sql" />
+    <Build Include="dbo\Stored Procedures\spMenu_GetMenuItemsByType.sql" />
+    <Build Include="dbo\Stored Procedures\SpOrders_GetLastOrderID.sql" />
+    <Build Include="dbo\Stored Procedures\spOrders_InsertANewOrder.sql" />
+    <Build Include="dbo\Stored Procedures\spOrders_GetOrderHistoryByID.sql" />
+    <Build Include="dbo\Stored Procedures\spUsers_Login.sql" />
+    <Build Include="dbo\Stored Procedures\spUsers_DoesUserExistByEMail.sql" />
+    <Build Include="dbo\Stored Procedures\spUsers_InsertANewUser.sql" />
+    <Build Include="dbo\Stored Procedures\spUsers_DoesUserExistByUserName.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="DBProj.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBProj.publish.xml" />
   </ItemGroup>
 </Project>
