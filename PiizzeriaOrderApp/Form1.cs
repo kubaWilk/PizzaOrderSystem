@@ -230,5 +230,11 @@ namespace PiizzeriaOrderApp
         {
 
         }
+
+        private void historiaZamówieńToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OrderHistory OrderHistoryWindow = new OrderHistory(CurrentUser);
+            OrderHistoryWindow.Show();
+        }
     }
 }

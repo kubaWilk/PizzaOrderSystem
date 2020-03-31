@@ -130,7 +130,7 @@ namespace PiizzeriaOrderApp
             {
                 try
                 {
-                    connection.Execute("spOrders_InsertANewOrder @UserID, @OrderItems, @OrderComments", order);
+                    connection.Execute("dbo.spOrders_InsertANewOrder @UserID, @OrderItems, @OrderComments", order);
                     return true;
                 }
                 catch (Exception ex)
@@ -140,5 +140,23 @@ namespace PiizzeriaOrderApp
                 }
             }
         }
+
+        public List<UserOrder> GetOrderHistory(int UserID)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MainDB")))
+            {
+                try
+                {
+                    var output = connection.Query<UserOrder>("dbo.spOrders_GetOrderHistory @UserID", new { UserID = UserID}).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Something went wrong in getting Order History from a database: {ex.Message}");
+                    return null;
+                }
+            }
+        }
+        
     }
 }

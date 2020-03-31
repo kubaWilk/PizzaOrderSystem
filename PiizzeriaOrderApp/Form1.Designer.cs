@@ -42,7 +42,10 @@
             this.AddToOrderButton = new System.Windows.Forms.Button();
             this.DeleteFromOrderButton = new System.Windows.Forms.Button();
             this.PlaceAnOrderButton = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.historiaZamówieńToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -183,6 +186,23 @@
             this.PlaceAnOrderButton.UseVisualStyleBackColor = true;
             this.PlaceAnOrderButton.Click += new System.EventHandler(this.PlaceAnOrderButton_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.historiaZamówieńToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(504, 24);
+            this.menuStrip1.TabIndex = 10;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // historiaZamówieńToolStripMenuItem
+            // 
+            this.historiaZamówieńToolStripMenuItem.Name = "historiaZamówieńToolStripMenuItem";
+            this.historiaZamówieńToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.historiaZamówieńToolStripMenuItem.Text = "Historia zamówień";
+            this.historiaZamówieńToolStripMenuItem.Click += new System.EventHandler(this.historiaZamówieńToolStripMenuItem_Click);
+            // 
             // OrderWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -197,11 +217,15 @@
             this.Controls.Add(this.OrderItemsListBox);
             this.Controls.Add(this.MenuItemsListBox);
             this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Calibri Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "OrderWindow";
             this.Text = "Złóż zamówienie";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,6 +247,8 @@
         private System.Windows.Forms.Button AddToOrderButton;
         private System.Windows.Forms.Button DeleteFromOrderButton;
         private System.Windows.Forms.Button PlaceAnOrderButton;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem historiaZamówieńToolStripMenuItem;
     }
 }
 

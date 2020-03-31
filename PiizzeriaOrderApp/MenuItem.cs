@@ -30,5 +30,42 @@ namespace PiizzeriaOrderApp
                 return MDAdds;
             }
         }
+
+        public static List<MenuItem> GetWholeMenu()
+        {
+            List<MenuItem> MainDish = GetMenuItemsByType("MainDish");
+            List<MenuItem> Add = GetMenuItemsByType("Add");
+            List<MenuItem> Pizza = GetMenuItemsByType("Pizza");
+            List<MenuItem> Soup = GetMenuItemsByType("Soup");
+            List<MenuItem> Drink = GetMenuItemsByType("Drink");
+
+            List<MenuItem> WholeMenu = new List<MenuItem>();
+            foreach(MenuItem item in MainDish)
+            {
+                WholeMenu.Add(item);
+            }
+
+            foreach (MenuItem item in Add)
+            {
+                WholeMenu.Add(item);
+            }
+
+            foreach (MenuItem item in Pizza)
+            {
+                WholeMenu.Add(item);
+            }
+
+            foreach (MenuItem item in Soup)
+            {
+                WholeMenu.Add(item);
+            }
+
+            foreach (MenuItem item in Drink)
+            {
+                WholeMenu.Add(item);
+            }
+
+            return WholeMenu;
+        } 
     }
 }

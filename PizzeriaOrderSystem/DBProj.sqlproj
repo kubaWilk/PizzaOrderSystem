@@ -72,6 +72,7 @@
     <Build Include="dbo\Stored Procedures\spUsers_DoesUserExistByEMail.sql" />
     <Build Include="dbo\Stored Procedures\spUsers_InsertANewUser.sql" />
     <Build Include="dbo\Stored Procedures\spUsers_DoesUserExistByUserName.sql" />
+    <Build Include="dbo\Stored Procedures\spOrders_GetOrderHistory.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DBProj.refactorlog" />

@@ -38,5 +38,11 @@ namespace PiizzeriaOrderApp
             if (Db.RegisterUser(ref Status, this)) return true;
             else return false;
         }
+
+        public List<UserOrder> GetOrderHistory()
+        {
+            DataAccess Db = new DataAccess();
+            return Db.GetOrderHistory(this.ID);
+        }
     }
 }
