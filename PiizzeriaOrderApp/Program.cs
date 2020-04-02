@@ -14,9 +14,16 @@ namespace PiizzeriaOrderApp
         [STAThread]
         static void Main()
         {
+            User UserInfo = new User();
+            UserInfo.UserName = "None";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new OrderWindow());
+
+            Application.Run(new LoginWindow(ref UserInfo));
+            if (UserInfo.UserName == "None") Application.Exit();
+                else Application.Run(new OrderWindow(UserInfo));
+
+            Application.Exit();
         }
     }
 }

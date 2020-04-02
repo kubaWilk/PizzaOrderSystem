@@ -30,23 +30,30 @@
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.MainDishButton = new System.Windows.Forms.Button();
-            this.MDAddsButton = new System.Windows.Forms.Button();
             this.PizzaButton = new System.Windows.Forms.Button();
             this.SoupsButton = new System.Windows.Forms.Button();
+            this.MDAddsButton = new System.Windows.Forms.Button();
             this.DrinksButton = new System.Windows.Forms.Button();
             this.MenuItemsListBox = new System.Windows.Forms.ListBox();
             this.OrderItemsListBox = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.OrderCommentsTextBox = new System.Windows.Forms.TextBox();
             this.SummedOrderPriceLabel = new System.Windows.Forms.Label();
             this.OrderCommentsLabel = new System.Windows.Forms.Label();
             this.AddToOrderButton = new System.Windows.Forms.Button();
             this.DeleteFromOrderButton = new System.Windows.Forms.Button();
             this.PlaceAnOrderButton = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.OrderHistoryToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.MainDishButton);
             this.flowLayoutPanel1.Controls.Add(this.PizzaButton);
             this.flowLayoutPanel1.Controls.Add(this.SoupsButton);
@@ -65,15 +72,7 @@
             this.MainDishButton.TabIndex = 0;
             this.MainDishButton.Text = "Danie Główne";
             this.MainDishButton.UseVisualStyleBackColor = true;
-            // 
-            // MDAddsButton
-            // 
-            this.MDAddsButton.Location = new System.Drawing.Point(280, 3);
-            this.MDAddsButton.Name = "MDAddsButton";
-            this.MDAddsButton.Size = new System.Drawing.Size(76, 46);
-            this.MDAddsButton.TabIndex = 1;
-            this.MDAddsButton.Text = "Dodatki";
-            this.MDAddsButton.UseVisualStyleBackColor = true;
+            this.MainDishButton.Click += new System.EventHandler(this.MainDishButton_Click);
             // 
             // PizzaButton
             // 
@@ -83,6 +82,7 @@
             this.PizzaButton.TabIndex = 2;
             this.PizzaButton.Text = "Pizza";
             this.PizzaButton.UseVisualStyleBackColor = true;
+            this.PizzaButton.Click += new System.EventHandler(this.PizzaButton_Click);
             // 
             // SoupsButton
             // 
@@ -92,6 +92,17 @@
             this.SoupsButton.TabIndex = 3;
             this.SoupsButton.Text = "Zupy";
             this.SoupsButton.UseVisualStyleBackColor = true;
+            this.SoupsButton.Click += new System.EventHandler(this.SoupsButton_Click);
+            // 
+            // MDAddsButton
+            // 
+            this.MDAddsButton.Location = new System.Drawing.Point(280, 3);
+            this.MDAddsButton.Name = "MDAddsButton";
+            this.MDAddsButton.Size = new System.Drawing.Size(76, 46);
+            this.MDAddsButton.TabIndex = 1;
+            this.MDAddsButton.Text = "Dodatki";
+            this.MDAddsButton.UseVisualStyleBackColor = true;
+            this.MDAddsButton.Click += new System.EventHandler(this.MDAddsButton_Click);
             // 
             // DrinksButton
             // 
@@ -101,6 +112,7 @@
             this.DrinksButton.TabIndex = 4;
             this.DrinksButton.Text = "Napoje";
             this.DrinksButton.UseVisualStyleBackColor = true;
+            this.DrinksButton.Click += new System.EventHandler(this.DrinksButton_Click);
             // 
             // MenuItemsListBox
             // 
@@ -120,12 +132,12 @@
             this.OrderItemsListBox.Size = new System.Drawing.Size(203, 274);
             this.OrderItemsListBox.TabIndex = 2;
             // 
-            // textBox1
+            // OrderCommentsTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(14, 449);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(453, 23);
-            this.textBox1.TabIndex = 3;
+            this.OrderCommentsTextBox.Location = new System.Drawing.Point(14, 449);
+            this.OrderCommentsTextBox.Name = "OrderCommentsTextBox";
+            this.OrderCommentsTextBox.Size = new System.Drawing.Size(453, 23);
+            this.OrderCommentsTextBox.TabIndex = 3;
             // 
             // SummedOrderPriceLabel
             // 
@@ -153,6 +165,7 @@
             this.AddToOrderButton.TabIndex = 7;
             this.AddToOrderButton.Text = "Dodaj do zamówienia";
             this.AddToOrderButton.UseVisualStyleBackColor = true;
+            this.AddToOrderButton.Click += new System.EventHandler(this.AddToOrderButton_Click);
             // 
             // DeleteFromOrderButton
             // 
@@ -162,35 +175,59 @@
             this.DeleteFromOrderButton.TabIndex = 8;
             this.DeleteFromOrderButton.Text = "Usuń z zamówienia";
             this.DeleteFromOrderButton.UseVisualStyleBackColor = true;
+            this.DeleteFromOrderButton.Click += new System.EventHandler(this.DeleteFromOrderButton_Click);
             // 
             // PlaceAnOrderButton
             // 
-            this.PlaceAnOrderButton.Location = new System.Drawing.Point(153, 478);
+            this.PlaceAnOrderButton.Location = new System.Drawing.Point(152, 478);
             this.PlaceAnOrderButton.Name = "PlaceAnOrderButton";
             this.PlaceAnOrderButton.Size = new System.Drawing.Size(170, 23);
             this.PlaceAnOrderButton.TabIndex = 9;
             this.PlaceAnOrderButton.Text = "Złóż zamówienie";
             this.PlaceAnOrderButton.UseVisualStyleBackColor = true;
+            this.PlaceAnOrderButton.Click += new System.EventHandler(this.PlaceAnOrderButton_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OrderHistoryToolStrip});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(484, 24);
+            this.menuStrip1.TabIndex = 10;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // OrderHistoryToolStrip
+            // 
+            this.OrderHistoryToolStrip.Name = "OrderHistoryToolStrip";
+            this.OrderHistoryToolStrip.Size = new System.Drawing.Size(117, 20);
+            this.OrderHistoryToolStrip.Text = "Historia zamówień";
+            this.OrderHistoryToolStrip.Click += new System.EventHandler(this.OrderHistoryToolStripMenuItem_Click);
             // 
             // OrderWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(504, 529);
+            this.ClientSize = new System.Drawing.Size(484, 511);
             this.Controls.Add(this.PlaceAnOrderButton);
             this.Controls.Add(this.DeleteFromOrderButton);
             this.Controls.Add(this.AddToOrderButton);
             this.Controls.Add(this.OrderCommentsLabel);
             this.Controls.Add(this.SummedOrderPriceLabel);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.OrderCommentsTextBox);
             this.Controls.Add(this.OrderItemsListBox);
             this.Controls.Add(this.MenuItemsListBox);
             this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Calibri Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.MainMenuStrip = this.menuStrip1;
+            this.MaximumSize = new System.Drawing.Size(500, 550);
+            this.MinimumSize = new System.Drawing.Size(500, 550);
             this.Name = "OrderWindow";
             this.Text = "Złóż zamówienie";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,12 +243,14 @@
         private System.Windows.Forms.Button DrinksButton;
         private System.Windows.Forms.ListBox MenuItemsListBox;
         private System.Windows.Forms.ListBox OrderItemsListBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox OrderCommentsTextBox;
         private System.Windows.Forms.Label SummedOrderPriceLabel;
         private System.Windows.Forms.Label OrderCommentsLabel;
         private System.Windows.Forms.Button AddToOrderButton;
         private System.Windows.Forms.Button DeleteFromOrderButton;
         private System.Windows.Forms.Button PlaceAnOrderButton;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem OrderHistoryToolStrip;
     }
 }
 
