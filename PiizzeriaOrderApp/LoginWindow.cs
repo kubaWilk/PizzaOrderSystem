@@ -27,27 +27,32 @@ namespace PiizzeriaOrderApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            UserRef.UserName = UserNameTextBox.Text;
-            UserRef.Password = PasswordTextBox.Text;
-            tempUser = UserRef.GetUser();
-
-            if(tempUser != null)
-            {
-                MessageBox.Show("Udało się zalogować!");
-                UserRef.ID = tempUser.ID;
-                UserRef.UserName = tempUser.UserName;
-                UserRef.Password = tempUser.Password;
-                UserRef.EMail = tempUser.EMail;
-                UserRef.FirstName = tempUser.FirstName;
-                UserRef.LastName = tempUser.LastName;
-                UserRef.Street = tempUser.Street;
-                UserRef.City = tempUser.City;
-                UserRef.PostCode = tempUser.PostCode;
-                Close();
-            }
+            if (UserNameTextBox.Text == "") MessageBox.Show("Proszę podać login!");
+            else if (PasswordTextBox.Text == "") MessageBox.Show("Proszę podać hasło!");
             else
             {
-                MessageBox.Show("Nieprawidłowe dane logowania");
+                UserRef.UserName = UserNameTextBox.Text;
+                UserRef.Password = PasswordTextBox.Text;
+                tempUser = UserRef.GetUser();
+
+                if (tempUser != null)
+                {
+                    MessageBox.Show("Udało się zalogować!");
+                    UserRef.ID = tempUser.ID;
+                    UserRef.UserName = tempUser.UserName;
+                    UserRef.Password = tempUser.Password;
+                    UserRef.EMail = tempUser.EMail;
+                    UserRef.FirstName = tempUser.FirstName;
+                    UserRef.LastName = tempUser.LastName;
+                    UserRef.Street = tempUser.Street;
+                    UserRef.City = tempUser.City;
+                    UserRef.PostCode = tempUser.PostCode;
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Nieprawidłowe dane logowania");
+                }
             }
         }
     }

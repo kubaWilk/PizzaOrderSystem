@@ -27,7 +27,17 @@ namespace PiizzeriaOrderApp
         }
         private string GetMailContent(User user, UserOrder order)
         {
-            string Content = $"Zamówienie nr {order.ID}: test";
+            string Content = $"<h1> {user.FirstName} dziękujemy za złożenie zamówienia! </h1>";
+            Content += $"<h2>Oto twoje zamówienie:</h2>";
+            Content += "<ul>";
+            List<MenuItem> OrderItems = order.ParseUserOrder();
+            
+            for(int index = 0; index < OrderItems.Count; index++)
+            {
+                Content += $"<li>{OrderItems[index].FullInfo}</li>";
+            }
+
+            Content += "</ul>";
             return Content;
         }
 
@@ -56,8 +66,7 @@ namespace PiizzeriaOrderApp
             }
             catch(Exception ex)
             {
-                MessageBox.Show($"Wysłanie wiadomości nie powiodło się {0}", ex.Message);
-                throw;
+                MessageBox.Show($"Wysłanie wiadomości nie powiodło się {ex.Message}");
             }
             OrderMsg.Dispose();
         }

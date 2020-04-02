@@ -35,7 +35,7 @@
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(137, 268);
+            this.CloseButton.Location = new System.Drawing.Point(146, 256);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(75, 23);
             this.CloseButton.TabIndex = 2;
@@ -64,10 +64,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(365, 309);
+            this.ClientSize = new System.Drawing.Size(364, 291);
             this.Controls.Add(this.SelectedOrderListBox);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.OrderHistoryListBox);
+            this.MaximumSize = new System.Drawing.Size(380, 330);
+            this.MinimumSize = new System.Drawing.Size(380, 330);
             this.Name = "OrderHistory";
             this.Text = "Historia Zamówień";
             this.ResumeLayout(false);
