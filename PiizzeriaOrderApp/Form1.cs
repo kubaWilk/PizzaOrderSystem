@@ -58,17 +58,20 @@ namespace PiizzeriaOrderApp
         private void PlaceAnOrderButton_Click(object sender, EventArgs e)
         {
             UserOrder order = new UserOrder();
-
-            if (order.PlaceOrder(UserOrder, CurrentUser, OrderCommentsTextBox.Text))
+            if (UserOrder.Count > 0)
             {
-                EmailSender OrderEmail = new EmailSender();
-                OrderEmail.SendAnEmail(CurrentUser, order);
-                MessageBox.Show("Zamówienie złożono pomyślnie.");
+                if (order.PlaceOrder(UserOrder, CurrentUser, OrderCommentsTextBox.Text))
+                {
+                    EmailSender OrderEmail = new EmailSender();
+                    OrderEmail.SendAnEmail(CurrentUser, order);
+                    MessageBox.Show("Zamówienie złożono pomyślnie.");
+                }
+                else
+                {
+                    Console.WriteLine("Złożenie zamówienia nie powiodło się.");
+                }
             }
-            else
-            {
-                Console.WriteLine("Złożenie zamówienia nie powiodło się.");
-            }
+            else MessageBox.Show("Zamówienie nie może być puste!");
         }
 
         private void OrderHistoryToolStripMenuItem_Click(object sender, EventArgs e)
