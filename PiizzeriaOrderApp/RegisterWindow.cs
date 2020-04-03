@@ -27,9 +27,9 @@ namespace PiizzeriaOrderApp
             else if (EmailTextBox.Text == "" || EmailTextBox.Text.Contains(" ") || !EmailCheck[EmailCheck.Length - 1].Contains(".")) MessageBox.Show("Proszę podać prawidłowy E - Mail!");
             else if (FirstNameTextBox.Text == "") MessageBox.Show("Proszę podać imię!");
             else if (LastNameTextBox.Text == "") MessageBox.Show("Proszę podać nazwisko!");
-            else if (StreetTextBox.Text == "" || StreetTextBox.Text.Contains(" ")) MessageBox.Show("Proszę podać prawidłową ulicę!");
+            else if (StreetTextBox.Text == "") MessageBox.Show("Proszę podać ulicę!");
             else if (CityTextBox.Text == "") MessageBox.Show("Proszę podać miasto!");
-            else if (PostCodeTextBox.Text == "" || CityTextBox.Text.Contains(" ") && !CityTextBox.Text.Contains("-")) MessageBox.Show("Proszę podać prawidłowy kod pocztowy!"); //that would change if app wasn't directed to polish user
+            else if (PostCodeTextBox.Text == "") MessageBox.Show("Proszę podać kod pocztowy!");
             else
             {
                 User UserToRegister = new User();
