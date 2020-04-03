@@ -59,6 +59,7 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\Stored Procedures" />
+    <Folder Include="dbo\PostDeploymentScripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Menu.sql" />
@@ -79,5 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DBProj.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="dbo\PostDeploymentScripts\CreateADefaultDB.sql" />
   </ItemGroup>
 </Project>

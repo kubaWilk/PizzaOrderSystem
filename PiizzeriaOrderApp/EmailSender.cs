@@ -38,6 +38,7 @@ namespace PiizzeriaOrderApp
             }
 
             Content += "</ul>";
+            Content += $"<p>Uwagi do zamówienia: {order.OrderComments}</p>";
             return Content;
         }
 
@@ -47,9 +48,9 @@ namespace PiizzeriaOrderApp
             OrderMsg.To.Add(user.EMail);
             OrderMsg.From = new MailAddress(ConfigurationManager.AppSettings.Get("FromEmail"),
                                        ConfigurationManager.AppSettings.Get("FromDisplayName"));
-            OrderMsg.Subject = $"Zamówienie nr {order.ID}";
+            OrderMsg.Subject = $"Zamówienie w {ConfigurationManager.AppSettings.Get("FromDisplayName")}";
             OrderMsg.IsBodyHtml = true;
-            OrderMsg.Body = GetMailContent(user, order); //add some content senpaaai
+            OrderMsg.Body = GetMailContent(user, order);
 
             return OrderMsg;
         }

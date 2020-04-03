@@ -7,6 +7,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DBProj", "PizzeriaOrderSyst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzeriaOrderApp", "PiizzeriaOrderApp\PizzeriaOrderApp.csproj", "{A5F7C04B-24EF-4D5E-B4D4-E37016D7413A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzeriaOrderApp.Tests", "PizzeriaOrderApp.Tests\PizzeriaOrderApp.Tests.csproj", "{B8CD4B5C-72DC-4197-AB97-6A2F2B84504C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{A5F7C04B-24EF-4D5E-B4D4-E37016D7413A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5F7C04B-24EF-4D5E-B4D4-E37016D7413A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5F7C04B-24EF-4D5E-B4D4-E37016D7413A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8CD4B5C-72DC-4197-AB97-6A2F2B84504C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8CD4B5C-72DC-4197-AB97-6A2F2B84504C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8CD4B5C-72DC-4197-AB97-6A2F2B84504C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8CD4B5C-72DC-4197-AB97-6A2F2B84504C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,7 +15,7 @@ namespace PiizzeriaOrderApp
         private List<MenuItem> UserOrder = new List<MenuItem>();
         private User CurrentUser;
         private int SummedOrderPrice = 0;
-        
+
         public OrderWindow(User UserInfo)
         {
             InitializeComponent();
@@ -65,6 +65,9 @@ namespace PiizzeriaOrderApp
                     EmailSender OrderEmail = new EmailSender();
                     OrderEmail.SendAnEmail(CurrentUser, order);
                     MessageBox.Show("Zamówienie złożono pomyślnie.");
+
+                    UserOrder = new List<MenuItem>();
+                    OrderItemsListBox.Items.Clear();
                 }
                 else
                 {
@@ -82,8 +85,6 @@ namespace PiizzeriaOrderApp
 
         private void AddToOrderButton_Click(object sender, EventArgs e)
         {
-            //I think it still needs to have a functionality of adding items inside a list. To be done later.
-            //Unfortunately this code has to stay here. I mean I could send indexes and stuff to the function, but what's the point?
             MenuItem tempMenuItem = MenuItemsListBox.SelectedItem as MenuItem;
             try
             {
@@ -114,7 +115,7 @@ namespace PiizzeriaOrderApp
                         catch (ArgumentOutOfRangeException ex)
                         {
                             MessageBox.Show("Na liście brakuje dania, do którego można wybrać dodatek.");
-                            Console.WriteLine("Catched an expression : {0}", ex.Message);
+                            Console.WriteLine($"Catched an expression : {ex.Message}");
                             break;
                         }
                     }
@@ -149,7 +150,7 @@ namespace PiizzeriaOrderApp
                             catch (ArgumentOutOfRangeException ex)
                             {
                                 MessageBox.Show("Na liście brakuje dania, do którego można wybrać dodatek.");
-                                Console.WriteLine("Catched an expression : {0}", ex);
+                                Console.WriteLine($"Catched an expression : {ex.Message}");
                                 break;
                             }
                         }
@@ -157,7 +158,7 @@ namespace PiizzeriaOrderApp
                     catch (ArgumentOutOfRangeException ex)
                     {
                         MessageBox.Show("Musisz wybrać danie, do którego chcesz dodatek!");
-                        Console.WriteLine("Catched an expression : {0}", ex.Message);
+                        Console.WriteLine($"Catched an expression : {ex.Message}");
                     }
                 }
                 else
@@ -211,8 +212,7 @@ namespace PiizzeriaOrderApp
                                 SummedOrderPriceLabel.Text = $"SUMA: {SummedOrderPrice}zł";
                                 break;
                             }
-                            Console.WriteLine("Catched an expression : {0}", ex.Message);
-
+                            Console.WriteLine($"Catched an expression : {ex.Message}");
                         }
                     }
                 }
