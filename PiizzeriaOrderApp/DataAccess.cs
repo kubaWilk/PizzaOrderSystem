@@ -11,14 +11,81 @@ namespace PiizzeriaOrderApp
 {
     public class DataAccess
     {
+        private List<User> generateSampleUser()
+        {
+            List<User> output = new List<User>();
+            output.Add(new User
+            {
+                ID = 0,
+                UserName = "test",
+                Password = "test",
+                EMail = "test",
+                FirstName = "Sample",
+                LastName = "User",
+                Street = "Sample Street",
+                PostCode = "test"
+            });
+            return output;
+        }
+
+        private List<MenuItem> generateSampleMenu()
+        {
+            List<MenuItem> output = new List<MenuItem>();
+
+            output.Add(new MenuItem 
+            {
+                ItemName = "SamplePizza",
+                ItemPrice = 2137,
+                ItemType = "Pizza"
+            });
+
+            output.Add(new MenuItem
+            {
+                ItemName = "SampleMainDish",
+                ItemPrice = 2137,
+                ItemType = "MainDish"
+            });
+
+            output.Add(new MenuItem
+            {
+                ItemName = "SampleSoup",
+                ItemPrice = 2137,
+                ItemType = "Soup"
+            });
+
+            output.Add(new MenuItem
+            {
+                ItemName = "SampleAdditive",
+                ItemPrice = 2137,
+                ItemType = "PizzaAdd"
+            });
+
+            output.Add(new MenuItem
+            {
+                ItemName = "SampleAdditive",
+                ItemPrice = 2137,
+                ItemType = "MDAdd"
+            });
+
+            output.Add(new MenuItem
+            {
+                ItemName = "SampleDrink",
+                ItemPrice = 2137,
+                ItemType = "Drink"
+            });
+
+            return output;
+        }
         public List<User> LoginUser(User user)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MainDB")))
             {
                 try
                 {
-                    var output = connection.Query<User>("dbo.spUsers_Login @UserName, @Password", new { UserName = user.UserName , Password = user.Password }).ToList();
-                    return output;
+                    //var output = connection.Query<User>("dbo.spUsers_Login @UserName, @Password", new { UserName = user.UserName , Password = user.Password }).ToList();
+                    //return output;
+
+                    return generateSampleUser();
                 }
                 catch (Exception ex)
                 {
@@ -34,8 +101,10 @@ namespace PiizzeriaOrderApp
             {
                 try
                 {
-                    var output = connection.Query<User>("dbo.spUsers_DoesUserExistByEMail @UserEMail", new { UserEMail = EMail }).ToList();
-                    return output;
+                    //var output = connection.Query<User>("dbo.spUsers_DoesUserExistByEMail @UserEMail", new { UserEMail = EMail }).ToList();
+                    //return output;
+
+                    return generateSampleUser();
                 }
                 catch (Exception ex)
                 {
@@ -50,8 +119,10 @@ namespace PiizzeriaOrderApp
             {
                 try
                 {
-                    var output = connection.Query<MenuItem>("dbo.spMenu_GetMenuItemsByType @RequestedType", new { RequestedType = Type }).ToList();
-                    return output;
+                    //var output = connection.Query<MenuItem>("dbo.spMenu_GetMenuItemsByType @RequestedType", new { RequestedType = Type }).ToList();
+                    //return output;
+
+                    return generateSampleMenu();
                 }
                 catch (Exception ex)
                 {
@@ -66,9 +137,11 @@ namespace PiizzeriaOrderApp
             {
                 try
                 {
-                    var output = connection.Query<User>("spUsers_DoesUserExistByUserName @UserName", new { UserName = UserToRegister.UserName }).ToList();
-                    User throwMeAnException = output[0];  //after a bit of thinking I've decided it's not that bad idea
-                    Status = "UserName";
+                    //var output = connection.Query<User>("spUsers_DoesUserExistByUserName @UserName", new { UserName = UserToRegister.UserName }).ToList();
+                    //User throwMeAnException = output[0];  //after a bit of thinking I've decided it's not that bad idea
+                    //Status = "UserName";
+
+                    return true;
                 }
                 catch (ArgumentOutOfRangeException ex)
                 {
@@ -85,12 +158,14 @@ namespace PiizzeriaOrderApp
                 {
                     if (Status != "UserName")
                     {
-                        var output = connection.Query<User>("spUsers_DoesUserExistByEMail @UserEMail", new { UserEMail = UserToRegister.EMail }).ToList();
-                        User throwMeAnException = output[0]; 
-                        Status = "EMail"; 
-                       
+                        //var output = connection.Query<User>("spUsers_DoesUserExistByEMail @UserEMail", new { UserEMail = UserToRegister.EMail }).ToList();
+                        //User throwMeAnException = output[0]; 
+                        //Status = "EMail"; 
 
-                        return false;
+
+                        //return false;
+
+                        return true;
                     }
                     else
                     {
@@ -130,7 +205,7 @@ namespace PiizzeriaOrderApp
             {
                 try
                 {
-                    connection.Execute("dbo.spOrders_InsertANewOrder @UserID, @OrderItems, @OrderComments", order);
+                    //connection.Execute("dbo.spOrders_InsertANewOrder @UserID, @OrderItems, @OrderComments", order);
                     return true;
                 }
                 catch (Exception ex)
@@ -147,7 +222,15 @@ namespace PiizzeriaOrderApp
             {
                 try
                 {
-                    var output = connection.Query<UserOrder>("dbo.spOrders_GetOrderHistory @UserID", new { UserID = UserID}).ToList();
+                    //var output = connection.Query<UserOrder>("dbo.spOrders_GetOrderHistory @UserID", new { UserID = UserID}).ToList();
+                    List<UserOrder> output = new List<UserOrder>();
+                    output.Add(new UserOrder
+                    {
+                        ID = 0,
+                        UserID = 0,
+                        OrderItems = "",
+                        OrderComments = "",
+                    });
                     return output;
                 }
                 catch (Exception ex)

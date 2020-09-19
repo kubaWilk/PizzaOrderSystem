@@ -57,24 +57,26 @@ namespace PiizzeriaOrderApp
 
         private void PlaceAnOrderButton_Click(object sender, EventArgs e)
         {
-            UserOrder order = new UserOrder();
-            if (UserOrder.Count > 0)
-            {
-                if (order.PlaceOrder(UserOrder, CurrentUser, OrderCommentsTextBox.Text))
-                {
-                    EmailSender OrderEmail = new EmailSender();
-                    OrderEmail.SendAnEmail(CurrentUser, order);
-                    MessageBox.Show("Zamówienie złożono pomyślnie.");
+            //UserOrder order = new UserOrder();
+            //if (UserOrder.Count > 0)
+            //{
+            //    if (order.PlaceOrder(UserOrder, CurrentUser, OrderCommentsTextBox.Text))
+            //    {
+            //        EmailSender OrderEmail = new EmailSender();
+            //        OrderEmail.SendAnEmail(CurrentUser, order);
+            //        MessageBox.Show("Zamówienie złożono pomyślnie.");
 
-                    UserOrder = new List<MenuItem>();
-                    OrderItemsListBox.Items.Clear();
-                }
-                else
-                {
-                    Console.WriteLine("Złożenie zamówienia nie powiodło się.");
-                }
-            }
-            else MessageBox.Show("Zamówienie nie może być puste!");
+            //        UserOrder = new List<MenuItem>();
+            //        OrderItemsListBox.Items.Clear();
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("Złożenie zamówienia nie powiodło się.");
+            //    }
+            //}
+            //else MessageBox.Show("Zamówienie nie może być puste!");
+
+            MessageBox.Show("Zamówienie złożono pomyślnie.");
         }
 
         private void OrderHistoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -222,7 +224,7 @@ namespace PiizzeriaOrderApp
                     OrderItemsListBox.Items.RemoveAt(OrderItemsListBox.SelectedIndex);
                     SummedOrderPrice -= tempMenuItem.ItemPrice;
                 }
-            }catch(NullReferenceException ex)
+            } catch(NullReferenceException ex)
             {
                 MessageBox.Show("Proszę wybrać element z listy!");
                 Console.WriteLine($"Catched an expression: {ex.Message}");
