@@ -8,7 +8,7 @@ using System.Net.Mime;
 using System.Configuration;
 using System.Windows.Forms;
 
-namespace PiizzeriaOrderApp
+namespace PizzaOrderLib
 {
     public class EmailSender
     {
@@ -30,7 +30,7 @@ namespace PiizzeriaOrderApp
             string Content = $"<h1> {user.FirstName} dziękujemy za złożenie zamówienia! </h1>";
             Content += $"<h2>Oto twoje zamówienie:</h2>";
             Content += "<ul>";
-            List<MenuItem> OrderItems = order.ParseUserOrder();
+            List<FoodItem> OrderItems = order.ParseUserOrder();
             
             for(int index = 0; index < OrderItems.Count; index++)
             {

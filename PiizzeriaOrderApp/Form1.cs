@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PizzaOrderLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +13,7 @@ namespace PiizzeriaOrderApp
 {
     public partial class OrderWindow : Form
     {
-        private List<MenuItem> UserOrder = new List<MenuItem>();
+        private List<FoodItem> UserOrder = new List<FoodItem>();
         private User CurrentUser;
         private int SummedOrderPrice = 0;
 
@@ -27,31 +28,31 @@ namespace PiizzeriaOrderApp
 
         private void MainDishButton_Click(object sender, EventArgs e)
         {
-            MenuItemsListBox.DataSource = MenuItem.GetMenuItemsByType("MainDish");
+            MenuItemsListBox.DataSource = FoodItemPublicContainer.getMainDish();
             MenuItemsListBox.DisplayMember = "FullInfo";
         }
 
         private void PizzaButton_Click(object sender, EventArgs e)
         {
-            MenuItemsListBox.DataSource = MenuItem.GetMenuItemsByType("Pizza");
+            MenuItemsListBox.DataSource = FoodItemPublicContainer.getPizza();
             MenuItemsListBox.DisplayMember = "FullInfo";
         }
 
         private void SoupsButton_Click(object sender, EventArgs e)
         {
-            MenuItemsListBox.DataSource = MenuItem.GetMenuItemsByType("Soup");
+            MenuItemsListBox.DataSource = FoodItemPublicContainer.getSoup();
             MenuItemsListBox.DisplayMember = "FullInfo";
         }
 
         private void MDAddsButton_Click(object sender, EventArgs e)
         {
-            MenuItemsListBox.DataSource = MenuItem.GetMenuItemsByType("Add");
+            MenuItemsListBox.DataSource = FoodItemPublicContainer.getAdd();
             MenuItemsListBox.DisplayMember = "FullInfo";
         }
 
         private void DrinksButton_Click(object sender, EventArgs e)
         {
-            MenuItemsListBox.DataSource = MenuItem.GetMenuItemsByType("Drink");
+            MenuItemsListBox.DataSource = FoodItemPublicContainer.getDrink();
             MenuItemsListBox.DisplayMember = "FullInfo";
         }
 
@@ -66,7 +67,7 @@ namespace PiizzeriaOrderApp
             //        OrderEmail.SendAnEmail(CurrentUser, order);
             //        MessageBox.Show("Zamówienie złożono pomyślnie.");
 
-            //        UserOrder = new List<MenuItem>();
+            //        UserOrder = new List<FoodItem>();
             //        OrderItemsListBox.Items.Clear();
             //    }
             //    else
@@ -79,7 +80,7 @@ namespace PiizzeriaOrderApp
             MessageBox.Show("Zamówienie złożono pomyślnie.");
         }
 
-        private void OrderHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OrderHistoryToolStripFoodItem_Click(object sender, EventArgs e)
         {
             OrderHistory OrderHistoryWindow = new OrderHistory(CurrentUser);
             OrderHistoryWindow.Show();
@@ -87,27 +88,27 @@ namespace PiizzeriaOrderApp
 
         private void AddToOrderButton_Click(object sender, EventArgs e)
         {
-            MenuItem tempMenuItem = MenuItemsListBox.SelectedItem as MenuItem;
+            FoodItem tempFoodItem = MenuItemsListBox.SelectedItem as FoodItem;
             try
             {
-                if (tempMenuItem.ItemType == "PizzaAdd")
+                if (tempFoodItem.ItemType == "PizzaAdd")
                 {
                     int count = 1;
                     while (count < 5)
                     {
                         try
                         {
-                            MenuItem AddCheckItem = OrderItemsListBox.Items[OrderItemsListBox.Items.Count - count] as MenuItem;
+                            FoodItem AddCheckItem = OrderItemsListBox.Items[OrderItemsListBox.Items.Count - count] as FoodItem;
                             if (AddCheckItem.ItemType != "Pizza" && AddCheckItem.ItemType != "PizzaAdd") { MessageBox.Show("Nie można wybrać tego dodatku do wybranego dania."); break; }
                             if (AddCheckItem.ItemType == "Pizza")
                             {
-                                OrderItemsListBox.Items.Add(tempMenuItem);
-                                UserOrder.Add(tempMenuItem);
-                                SummedOrderPrice += tempMenuItem.ItemPrice;
+                                OrderItemsListBox.Items.Add(tempFoodItem);
+                                UserOrder.Add(tempFoodItem);
+                                SummedOrderPrice += tempFoodItem.ItemPrice;
                                 SummedOrderPriceLabel.Text = $"SUMA: {SummedOrderPrice}zł";
                                 break;
                             }
-                            else if (AddCheckItem.ItemName == tempMenuItem.ItemName) // && AddCheckItem.ItemType != "Pizza"
+                            else if (AddCheckItem.ItemName == tempFoodItem.ItemName) // && AddCheckItem.ItemType != "Pizza"
                             {
                                 MessageBox.Show("Nie można dodać tego samego dodatku dwa razy!");
                                 break;
@@ -122,7 +123,7 @@ namespace PiizzeriaOrderApp
                         }
                     }
                 }
-                else if (tempMenuItem.ItemType == "MDAdd")
+                else if (tempFoodItem.ItemType == "MDAdd")
                 {
                     try
                     {
@@ -131,17 +132,17 @@ namespace PiizzeriaOrderApp
                         {
                             try
                             {
-                                MenuItem AddCheckItem = OrderItemsListBox.Items[OrderItemsListBox.Items.Count - count] as MenuItem;
+                                FoodItem AddCheckItem = OrderItemsListBox.Items[OrderItemsListBox.Items.Count - count] as FoodItem;
                                 if (AddCheckItem.ItemType != "MainDish" && AddCheckItem.ItemType != "MDAdd") { MessageBox.Show("Nie można wybrać tego dodatku do wybranego dania."); break; }
                                 if (AddCheckItem.ItemType == "MainDish")
                                 {
-                                    OrderItemsListBox.Items.Add(tempMenuItem);
-                                    UserOrder.Add(tempMenuItem);
-                                    SummedOrderPrice += tempMenuItem.ItemPrice;
+                                    OrderItemsListBox.Items.Add(tempFoodItem);
+                                    UserOrder.Add(tempFoodItem);
+                                    SummedOrderPrice += tempFoodItem.ItemPrice;
                                     SummedOrderPriceLabel.Text = $"SUMA: {SummedOrderPrice}zł";
                                     break;
                                 }
-                                else if (AddCheckItem.ItemName == tempMenuItem.ItemName && AddCheckItem.ItemType != "MainDish")
+                                else if (AddCheckItem.ItemName == tempFoodItem.ItemName && AddCheckItem.ItemType != "MainDish")
                                 {
                                     MessageBox.Show("Nie można dodać tego samego dodatku dwa razy!");
                                     break;
@@ -165,9 +166,9 @@ namespace PiizzeriaOrderApp
                 }
                 else
                 {
-                    UserOrder.Add(tempMenuItem);
-                    OrderItemsListBox.Items.Add(tempMenuItem);
-                    SummedOrderPrice += tempMenuItem.ItemPrice;
+                    UserOrder.Add(tempFoodItem);
+                    OrderItemsListBox.Items.Add(tempFoodItem);
+                    SummedOrderPrice += tempFoodItem.ItemPrice;
                     SummedOrderPriceLabel.Text = $"SUMA: {SummedOrderPrice}zł";
                 }
             }catch(NullReferenceException ex)
@@ -179,23 +180,23 @@ namespace PiizzeriaOrderApp
 
         private void DeleteFromOrderButton_Click(object sender, EventArgs e)
         {
-            MenuItem tempMenuItem = OrderItemsListBox.SelectedItem as MenuItem;
+            FoodItem tempFoodItem = OrderItemsListBox.SelectedItem as FoodItem;
             try
             {
-                if (tempMenuItem.ItemType == "Pizza" || tempMenuItem.ItemType == "MainDish")
+                if (tempFoodItem.ItemType == "Pizza" || tempFoodItem.ItemType == "MainDish")
                 {
                     for (int count = 0; count < 5; count++)
                     {
                         try
                         {
-                            MenuItem TempUserOrderRef = UserOrder[OrderItemsListBox.SelectedIndex + 1];
+                            FoodItem TempUserOrderRef = UserOrder[OrderItemsListBox.SelectedIndex + 1];
                             if (TempUserOrderRef.ItemType != "PizzaAdd" && TempUserOrderRef.ItemType != "MDAdd")
                             {
-                                if (tempMenuItem.ItemType == "Pizza" || tempMenuItem.ItemType == "MainDish")
+                                if (tempFoodItem.ItemType == "Pizza" || tempFoodItem.ItemType == "MainDish")
                                 {
                                     UserOrder.RemoveAt(OrderItemsListBox.SelectedIndex);
                                     OrderItemsListBox.Items.RemoveAt(OrderItemsListBox.SelectedIndex);
-                                    SummedOrderPrice -= tempMenuItem.ItemPrice;
+                                    SummedOrderPrice -= tempFoodItem.ItemPrice;
                                     SummedOrderPriceLabel.Text = $"SUMA: {SummedOrderPrice}zł";
                                 }
                                 break;
@@ -206,11 +207,11 @@ namespace PiizzeriaOrderApp
                         }
                         catch (ArgumentOutOfRangeException ex)
                         {
-                            if (tempMenuItem.ItemType == "Pizza" || tempMenuItem.ItemType == "MainDish")
+                            if (tempFoodItem.ItemType == "Pizza" || tempFoodItem.ItemType == "MainDish")
                             {
                                 UserOrder.RemoveAt(OrderItemsListBox.SelectedIndex);
                                 OrderItemsListBox.Items.RemoveAt(OrderItemsListBox.SelectedIndex);
-                                SummedOrderPrice -= tempMenuItem.ItemPrice;
+                                SummedOrderPrice -= tempFoodItem.ItemPrice;
                                 SummedOrderPriceLabel.Text = $"SUMA: {SummedOrderPrice}zł";
                                 break;
                             }
@@ -222,7 +223,7 @@ namespace PiizzeriaOrderApp
                 {
                     UserOrder.RemoveAt(OrderItemsListBox.SelectedIndex);
                     OrderItemsListBox.Items.RemoveAt(OrderItemsListBox.SelectedIndex);
-                    SummedOrderPrice -= tempMenuItem.ItemPrice;
+                    SummedOrderPrice -= tempFoodItem.ItemPrice;
                 }
             } catch(NullReferenceException ex)
             {

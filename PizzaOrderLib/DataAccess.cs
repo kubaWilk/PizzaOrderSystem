@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Dapper;
 using System.Data;
 
-namespace PiizzeriaOrderApp
+namespace PizzaOrderLib
 {
     public class DataAccess
     {
@@ -24,46 +24,46 @@ namespace PiizzeriaOrderApp
             return output;
         }
 
-        private List<MenuItem> generateSampleMenu()
+        private List<FoodItem> generateSampleMenu()
         {
-            List<MenuItem> output = new List<MenuItem>();
+            List<FoodItem> output = new List<FoodItem>();
 
-            output.Add(new MenuItem 
+            output.Add(new FoodItem 
             {
                 ItemName = "SamplePizza",
                 ItemPrice = 2137,
                 ItemType = "Pizza"
             });
 
-            output.Add(new MenuItem
+            output.Add(new FoodItem
             {
                 ItemName = "SampleMainDish",
                 ItemPrice = 2137,
                 ItemType = "MainDish"
             });
 
-            output.Add(new MenuItem
+            output.Add(new FoodItem
             {
                 ItemName = "SampleSoup",
                 ItemPrice = 2137,
                 ItemType = "Soup"
             });
 
-            output.Add(new MenuItem
+            output.Add(new FoodItem
             {
                 ItemName = "SampleAdditive",
                 ItemPrice = 2137,
                 ItemType = "PizzaAdd"
             });
 
-            output.Add(new MenuItem
+            output.Add(new FoodItem
             {
                 ItemName = "SampleAdditive",
                 ItemPrice = 2137,
                 ItemType = "MDAdd"
             });
 
-            output.Add(new MenuItem
+            output.Add(new FoodItem
             {
                 ItemName = "SampleDrink",
                 ItemPrice = 2137,
@@ -109,7 +109,7 @@ namespace PiizzeriaOrderApp
                 }
             }
         }
-        public List<MenuItem> GetMenu(string Type)
+        public List<FoodItem> GetMenu(string Type)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MainDB")))
             {

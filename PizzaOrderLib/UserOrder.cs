@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PiizzeriaOrderApp
+namespace PizzaOrderLib
 {
     public class UserOrder
     {
@@ -21,7 +21,7 @@ namespace PiizzeriaOrderApp
             } 
         }
 
-        public bool PlaceOrder(List<MenuItem> OrderList, User user, string Comments)
+        public bool PlaceOrder(List<FoodItem> OrderList, User user, string Comments)
         {
             DataAccess Db = new DataAccess();
             //this.ID = Db.GetNewOrderID() + 1;
@@ -37,10 +37,10 @@ namespace PiizzeriaOrderApp
             else return false;
         }
 
-        public List<MenuItem> ParseUserOrder()
+        public List<FoodItem> ParseUserOrder()
         {
-            List<MenuItem> WholeMenu = MenuItem.GetWholeMenu();
-            List<MenuItem> SelectedOrder = new List<MenuItem>();
+            List<FoodItem> WholeMenu = FoodItemPublicContainer.WholeMenu;
+            List<FoodItem> SelectedOrder = new List<FoodItem>();
 
             List<string> OrderItemsTable = new List<string>();
 
