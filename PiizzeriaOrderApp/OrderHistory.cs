@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PizzaOrderLib;
 
 namespace PiizzeriaOrderApp
 {
@@ -31,9 +32,9 @@ namespace PiizzeriaOrderApp
 
         private void OrderHistoryListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<MenuItem> OrderList = OrderHistoryList[OrderHistoryListBox.SelectedIndex].ParseUserOrder();
-            SelectedOrderListBox.DataSource = OrderList;
-            SelectedOrderListBox.DisplayMember = "FullInfo";
+            //List<MenuItem> OrderList = OrderHistoryList[OrderHistoryListBox.SelectedIndex].ParseUserOrder();
+            //SelectedOrderListBox.DataSource = OrderList;
+            //SelectedOrderListBox.DisplayMember = "FullInfo";
         }
     }
 }

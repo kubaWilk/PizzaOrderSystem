@@ -19,19 +19,6 @@ namespace PizzaOrderLib
         public string City { get; set; }
         public string PostCode { get; set; }
 
-        public User GetUser()
-        {
-            DataAccess Db = new DataAccess();
-            List<User> User;
-            User = Db.LoginUser(this);
-
-            if (User.Count == 0)
-            {
-                return null;
-            }
-            else return User[0];
-        }
-
         public bool RegisterAUser(ref string Status)
         {
             DataAccess Db = new DataAccess();

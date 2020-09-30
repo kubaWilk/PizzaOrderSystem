@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PizzaOrderLib;
 
 namespace PiizzeriaOrderApp
 {
@@ -14,14 +15,13 @@ namespace PiizzeriaOrderApp
         [STAThread]
         static void Main()
         {
-            User UserInfo = new User();
-            UserInfo.UserName = "None";
+            UserLoggingIn.currentUser = new User { UserName = "null" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new LoginWindow(ref UserInfo));
-            if (UserInfo.UserName == "None") Application.Exit();
-                else Application.Run(new OrderWindow(UserInfo));
+            Application.Run(new LoginWindow());
+            if (UserLoggingIn.currentUser.UserName == "null") Application.Exit();
+            else Application.Run(new OrderWindow());
 
             Application.Exit();
         }

@@ -14,13 +14,11 @@ namespace PiizzeriaOrderApp
     public partial class OrderWindow : Form
     {
         private List<FoodItem> UserOrder = new List<FoodItem>();
-        private User CurrentUser;
         private int SummedOrderPrice = 0;
 
-        public OrderWindow(User UserInfo)
+        public OrderWindow()
         {
             InitializeComponent();
-            CurrentUser = UserInfo;
             MenuItemsListBox.DisplayMember = "FullInfo";
             OrderItemsListBox.DisplayMember = "FullInfo";
             SummedOrderPriceLabel.Text = "SUMA: 0zł";
@@ -82,7 +80,7 @@ namespace PiizzeriaOrderApp
 
         private void OrderHistoryToolStripFoodItem_Click(object sender, EventArgs e)
         {
-            OrderHistory OrderHistoryWindow = new OrderHistory(CurrentUser);
+            OrderHistory OrderHistoryWindow = new OrderHistory(UserLoggingIn.currentUser);
             OrderHistoryWindow.Show();
         }
 

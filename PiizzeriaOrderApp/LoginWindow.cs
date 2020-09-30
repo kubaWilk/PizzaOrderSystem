@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using PizzaOrderLib;
 
 namespace PiizzeriaOrderApp
 {
     public partial class LoginWindow : Form
     {
-        private User UserRef, tempUser;
-        public LoginWindow(ref User UserInfo)
+
+        public LoginWindow()
         {
-            UserRef = UserInfo;
             InitializeComponent();
         }
 
@@ -27,32 +20,37 @@ namespace PiizzeriaOrderApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (UserNameTextBox.Text == "") MessageBox.Show("Proszę podać login!");
-            else if (PasswordTextBox.Text == "") MessageBox.Show("Proszę podać hasło!");
-            else
+            switch(UserLoggingIn.UserLogIn(UserNameTextBox.Text, PasswordTextBox.Text))
             {
-                UserRef.UserName = UserNameTextBox.Text;
-                UserRef.Password = PasswordTextBox.Text;
-                tempUser = UserRef.GetUser();
-
-                if (tempUser != null)
-                {
-                    MessageBox.Show("Udało się zalogować!");
-                    UserRef.ID = tempUser.ID;
-                    UserRef.UserName = tempUser.UserName;
-                    UserRef.Password = tempUser.Password;
-                    UserRef.EMail = tempUser.EMail;
-                    UserRef.FirstName = tempUser.FirstName;
-                    UserRef.LastName = tempUser.LastName;
-                    UserRef.Street = tempUser.Street;
-                    UserRef.City = tempUser.City;
-                    UserRef.PostCode = tempUser.PostCode;
-                    Close();
-                }
-                else
-                {
-                    MessageBox.Show("Nieprawidłowe dane logowania");
-                }
+                /*
+                    * 10 - no login
+                    * 11 - no password
+                    * 1 - logged in successfully
+                    * 0 - bad input
+                */
+                case 10: 
+                    {
+                        MessageBox.Show("Proszę podać login.");
+                        break;
+                    }
+                case 11:
+                    {
+                        MessageBox.Show("Proszę podać hasło.");
+                        break;
+                    }
+                case 1:
+                    {
+                        MessageBox.Show("Zalogowano pomyślnie!");
+                        OrderWindow orderWindow = new OrderWindow();
+                        orderWindow.Show();
+                        Close();
+                        break;
+                    }
+                default:
+                    {
+                        MessageBox.Show("Proszę spróbować jeszcze raz.");
+                        break;
+                    }
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace PiizzeriaOrderApp
+﻿using System;
+
+namespace PiizzeriaOrderApp
 {
     partial class OrderWindow
     {
@@ -231,6 +233,11 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void OrderHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
